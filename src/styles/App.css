@@ -1,0 +1,18 @@
+@import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+body{
+    background-image: linear-gradient(to right, #2193b0, #6dd5ed);
+}
+
+.navitem{
+    color: white;
+}
+
+
+.padding-top{
+    padding-top: 100px;
+}
+
+.userId{
+    color: white;
+}
