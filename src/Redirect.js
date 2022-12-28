@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 const Redirect = async() => {
     const {shortURL}=useParams();
-    const response = await fetch(`http://localhost:4000/api/redirect/${shortURL}`)
+    const response = await fetch(`https://yazlab-url-api.herokuapp.com/api/redirect/${shortURL}`)
 
     const data =  await response.json();
     console.log(data);

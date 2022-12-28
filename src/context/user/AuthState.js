@@ -33,7 +33,7 @@ const AuthState = (props) => {
         setHata(true)
         setLoading(true)
 
-        const response = await fetch('http://localhost:4000/api/user/login', {
+        const response = await fetch('https://yazlab-url-api.herokuapp.com/api/user/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({userMail, userPassword})
@@ -67,7 +67,7 @@ const AuthState = (props) => {
         setHata(true)
         setLoading(true)
 
-        const response = await fetch('http://localhost:4000/api/user/register', {
+        const response = await fetch('https://yazlab-url-api.herokuapp.com/api/user/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({userId,userMail, userPassword})

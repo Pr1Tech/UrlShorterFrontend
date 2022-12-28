@@ -36,7 +36,7 @@ const UrlState = (props) => {
         setHata(true)
         setLoading(true)
 
-        const response = await fetch('http://localhost:4000/api/url', {
+        const response = await fetch('https://yazlab-url-api.herokuapp.com/api/url', {
             method: 'POST',
             headers:{
                 'Authorization': `Bearer ${user.token}`,
@@ -74,7 +74,7 @@ const UrlState = (props) => {
         setHata(true)
         setLoading(true)
 
-        const response = await fetch(`http://localhost:4000/api/url/list/${userMail}`,{
+        const response = await fetch(`https://yazlab-url-api.herokuapp.com/api/url/list/${userMail}`,{
             headers:({
                 'Authorization': `Bearer ${user.token}`,
                 'Content-Type': 'application/json',
