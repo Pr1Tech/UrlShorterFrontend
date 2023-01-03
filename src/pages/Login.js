@@ -3,7 +3,7 @@ import AuthContext from '../context/user/AuthContext'
 
 
 
-export default function UrlShorter() {
+export default function Login() {
     
     const {login,hata,loading}=useContext(AuthContext)
 

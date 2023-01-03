@@ -1,0 +1,28 @@
+@import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+
+
+table {
+    border-spacing: 0;
+    background: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+tr,td {
+    
+    
+    border-bottom: 0;
+    border-right: 0;
+    
+}
+
+th,
+td {
+    margin: 0;
+    padding: 0.5rem;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+
+    
+} 
+  

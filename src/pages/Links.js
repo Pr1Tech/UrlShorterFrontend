@@ -1,14 +1,89 @@
 import React, { useContext, useEffect} from 'react'
 import AuthContext from '../context/user/AuthContext'
 import UrlContext from '../context/url/urlContext';
+import '../styles/dashboard.css';
+import { useTable,useSortBy } from 'react-table'
+
+
 
 
 export default function Links() {
 
     
+    
 
     const {user} = useContext(AuthContext);
-    const {urls,getUrls,hata}= useContext(UrlContext);
+    const {urls,getUrls,hata,deleteUrl}= useContext(UrlContext);
+
+    const handleDelete = () => {
+
+      deleteUrl(user.userMail,urls.original_url)
+
+    }
+
+    // Add a new property to the data with mapping
+
+    const datas = urls.map((url,index)=>{
+        return {
+            original_url:url.original_url,
+            shortened_url:"http://localhost:3000/"+url.shortened_url,
+            specialURL:url.specialURL,
+            end_time:url.end_time,
+            clicks:url.clicks,
+            date:url.date
+        }
+    })
+
+    const data = React.useMemo(
+        () => datas,
+        []
+    )
+
+
+
+    
+
+    const columns = React.useMemo(
+        () => [
+            {
+                Header: 'Orjinal Url',
+                accessor: 'original_url', // accessor is the "key" in the data
+            },
+            {
+                Header: 'Kısa Url',
+                accessor: 'shortened_url',
+            },
+            {
+                Header: 'Özel Url',
+                accessor: 'specialURL',
+            },
+            {
+                Header: 'Bitiş Zamanı',
+                accessor: 'end_time',
+            },
+            {
+                Header: 'Tıklanma',
+                accessor: 'clicks',
+            },
+            {
+                Header: 'Başlangıç Tarihi',
+                accessor: 'date',
+            },
+        ],
+        []
+    )
+
+
+
+    const tableInstance = useTable({ columns, data }, useSortBy)
+ 
+    const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    } = tableInstance
 
 
     useEffect(()=>{
@@ -18,41 +93,63 @@ export default function Links() {
 
     
     return (
-        <div>
+        <div className='dashboard'>
             {!hata &&
-                <table className='table table-striped'>
-                    <thead>
-                        <tr>
-                            <th scope='col'>Orjinal Url</th>
-                            <th scope='col'>Kısa Url</th>
-                            <th scope='col'>Özel Url</th>
-                            <th scope='col'>Bitiş Zamanı</th>
-                            <th scope='col'> Tıklanma</th>
-                            <th scope='col'> Başlangıç Tarihi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            urls.map((url,index)=>{
+                <table {...getTableProps()}>
+                <thead>
+                  {// Loop over the header rows
+                  headerGroups.map(headerGroup => (
+                    // Apply the header row props
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                      {// Loop over the headers in each row
+                      headerGroup.headers.map(column => (
+                        // Apply the header cell props
+                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                        {column.render('Header')}
+                        {/* Add a sort direction indicator */}
+                        </th>
+                      ))}
+                        <th>
+                          Sil
+                        </th>
+                    </tr>
 
-                                return(
-                                    <tr key={index}>
-                                        <th>{url.original_url}</th>
-                                        <th>{url.shortened_url}</th>
-                                        <th>{url.specialURL}</th>
-                                        <th>{url.end_time}</th>
-                                        <th>{url.clicks}</th>
-                                        <th>{url.date}</th>
-                                    </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-                </table>
+                  ))}
+                </thead>
+                {/* Apply the table body props */}
+                <tbody {...getTableBodyProps()}>
+                  {// Loop over the table rows
+                  rows.map(row => {
+                    // Prepare the row for display
+                    prepareRow(row)
+                    return (
+                      // Apply the row props
+                      <tr {...row.getRowProps()}>
+                        {// Loop over the rows cells
+                        row.cells.map(cell => {
+                          // Apply the cell props
+                          return (
+                            <>
+                                <td {...cell.getCellProps()}>
+                                {// Render the cell contents
+                                cell.render('Cell')}
+                                </td>
+                            
+                            </>
+
+                          )
+                          
+                        })}
+                        <td>
+                            <button onClick={handleDelete} className='btn btn-danger'>Sil</button>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+                
             }
-            
-            
-
         </div>
     )
 }

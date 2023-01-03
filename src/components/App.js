@@ -12,7 +12,6 @@ import { useContext } from 'react';
 
 
 function App() {
-
   const {user} = useContext(AuthContext)
 
   return (
@@ -21,9 +20,9 @@ function App() {
         <Navbar/>
         <div className='pages'>
           <Routes>
-            <Route exact path='/' element={user ? <UrlShorter/>:<Navigate to="/Login"/>}/>
-            <Route exact path='/ShortUrl' element={user ? <ShortUrl/> : <Navigate to="/Login"/>}/>
             <Route exact path='/Links' element={user ? <Links/> : <Navigate to="/Login"/>}/>
+            <Route exact path='/ShortUrl' element={user ? <ShortUrl/> : <Navigate to="/Login"/>}/>
+            <Route exact path='/' element={user ? <UrlShorter/>:<Navigate to="/Login"/>}/>
             <Route exact path='/Login' element={!user ? <Login/> : <Navigate to="/"/>}/>
             <Route exact path='/Register' element={!user ? <Register/> : <Navigate to="/"/>}/>
             <Route exact path='/:shortURL' element={<Redirect/>}/>
