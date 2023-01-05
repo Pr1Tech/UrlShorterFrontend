@@ -13,13 +13,9 @@ export default function Links() {
     
 
     const {user} = useContext(AuthContext);
-    const {urls,getUrls,hata,deleteUrl}= useContext(UrlContext);
+    const {urls,getUrls,hata}= useContext(UrlContext);
 
-    const handleDelete = () => {
-
-      deleteUrl(user.userMail,urls.original_url)
-
-    }
+    
 
     // Add a new property to the data with mapping
 
@@ -93,7 +89,7 @@ export default function Links() {
 
     
     return (
-        <div className='dashboard'>
+        <div className='dashboard container mt-5'>
             {!hata &&
                 <table {...getTableProps()}>
                 <thead>
@@ -109,9 +105,6 @@ export default function Links() {
                         {/* Add a sort direction indicator */}
                         </th>
                       ))}
-                        <th>
-                          Sil
-                        </th>
                     </tr>
 
                   ))}
@@ -140,9 +133,6 @@ export default function Links() {
                           )
                           
                         })}
-                        <td>
-                            <button onClick={handleDelete} className='btn btn-danger'>Sil</button>
-                        </td>
                       </tr>
                     )
                   })}
@@ -150,6 +140,7 @@ export default function Links() {
               </table>
                 
             }
+            {hata && <h1>Henüz kısa url oluşturmadınız</h1>}
         </div>
     )
 }

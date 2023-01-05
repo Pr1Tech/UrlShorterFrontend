@@ -42,11 +42,15 @@ export default function UrlShorter() {
                                     </div>
                                     <div className='mb-3'>
                                         <label htmlFor='end_time' className='form-label'>Bitiş Tarihi</label>
-                                        <input type='date' className='form-control' id='end_time' value={end_time} onChange={(e) => setEnd_time(e.target.value)}/>
+                                        <input type='datetime-local' className='form-control' id='end_time' value={end_time} onChange={(e) => setEnd_time(e.target.value)}/>
                                     </div>
                                     <button disabled={loading} type='submit' className='btn btn-primary mt-3'>Kısalt</button>
+
+                                    {!hata &&
+                                        <Link to="/ShortUrl" className="btn btn-primary mt-3 ms-3">Git</Link>
+                                    }
                                     
-                                    <Link to="/ShortUrl" className="btn btn-primary mt-3">Git</Link>
+                                    
                                     
                                 </form>
                                 {hata &&
